@@ -7,6 +7,7 @@ const statusOutputDiv = document.getElementById('statusOutput');
 const benchmarkResultsTableDiv = document.getElementById('benchmarkResultsTable');
 
 let webGpuAvailable = false; // Flag to track WebGPU availability
+let promptApiAvailable = false; // Flag to track PromptAPI availability
 let session = null; // Session still tracked globally to manage closing if needed
 
 // Flags for controlling button state based on user's choice
@@ -31,8 +32,8 @@ function updateStatus(message) {
  * @returns {Promise<boolean>} True if session was successfully created, false otherwise.
  */
 async function ensureSessionCreated(roundInfo = "") {
-    if (!webGpuAvailable) {
-        updateStatus("WebGPU is not available. Cannot create session.");
+    if (!promptApiAvailable) {
+        updateStatus("Prompt API is not available. Cannot create session.");
         return false;
     }
 
@@ -77,11 +78,16 @@ async function ensureSessionCreated(roundInfo = "") {
 
 
 function setButtonStates() {
-    promptInput.disabled = isOperationActive || !webGpuAvailable;
+    promptInput.disabled = isOperationActive || !promptApiAvailable;
 
-    if (!webGpuAvailable) {
+    if (!promptApiAvailable) {
         generateResponseButton.disabled = true;
         benchmarkButton.disabled = true;
+
+        outputDiv.innerHTML = `Prompt API is NOT available in this browser.
+Refer to browser setup for installation <a href="https://github.com/wenqinI/built-in-ai-benchmark?tab=readme-ov-file#browser-setup" target="_blank">browser setup instructions</a>.
+`;
+
         return;
     }
 
@@ -106,10 +112,8 @@ async function detectWebGPU() {
         await logGpuInfo();
     } else {
         webGpuAvailable = false;
-        updateStatus("WebGPU is not available in this browser. This app requires a browser with WebGPU support.");
-        console.warn("WebGPU is not available in this browser.");
+        console.warn("WebGPU is NOT available in this browser.");
     }
-    setButtonStates();
 }
 
 async function logGpuInfo() {
@@ -124,6 +128,23 @@ async function logGpuInfo() {
         console.error("Error retrieving GPU adapter info:", error);
     }
 }
+
+async function detectPromptAPI() {
+    if ("LanguageModel" in window) {
+        const available = await LanguageModel.availability();
+        if (available == "available") {
+            promptApiAvailable = true;
+        }
+    }
+}
+
+async function detectAvailability() {
+    await detectWebGPU()
+    await detectPromptAPI()
+
+    setButtonStates();
+}
+
 
 // --- Core Inference Function (Reusable for both single generation and benchmark) ---
 async function performGeneration(userPrompt, isWarmup = false) {
@@ -437,4 +458,4 @@ generateResponseButton.addEventListener('click', generateResponse);
 benchmarkButton.addEventListener('click', runBenchmark);
 
 // --- Initial Setup on Page Load ---
-window.addEventListener('load', detectWebGPU);
+window.addEventListener('load', detectAvailability);
