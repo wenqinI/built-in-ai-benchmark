@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Built-in AI Simple Benchmark</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        label,
+        button {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        #output {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            min-height: 50px;
+            white-space: pre-wrap;
+        }
+
+        #statusOutput {
+            background-color: #e0f7fa;
+            /* Light blue background */
+            padding: 8px;
+            border: 1px solid #b2ebf2;
+            /* Light blue border */
+            border-radius: 4px;
+            min-height: 20px;
+            font-size: 0.9em;
+            color: #00796b;
+            /* Darker teal text */
+            white-space: pre-wrap;
+        }
+
+        .checkbox-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .checkbox-container label {
+            display: inline-block;
+            margin-bottom: 0;
+        }
+
+        #promptInput {
+            height: 50px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        #output {
+            height: 150px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        #benchmarkResultsTable {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        #benchmarkResultsTable table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        #benchmarkResultsTable th,
+        #benchmarkResultsTable td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        #benchmarkResultsTable th {
+            background-color: #f2f2f2;
+        }
+
+        #benchmarkResultsTable td:first-child {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Built-in AI Simple Benchmark</h1>
+
+    <div>
+        <h2>Prompt:</h2>
+        <textarea
+            id="promptInput">Imagine the world of 2050, and describe what it will look like in 100 words.</textarea>
+        <button id="generateResponseButton">Generate Response</button>
+        <button id="benchmarkButton">Benchmark (5 Rounds)</button>
+    </div>
+
+    <div>
+        <h2>Response:</h2>
+        <div id="output"> </div>
+        <div id="statusOutput">Press 'Generate Response' or 'Benchmark' to start.</div>
+    </div>
+
+    <div id="benchmarkResultsTable">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
