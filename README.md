@@ -18,7 +18,7 @@ To run this benchmark, you must first enable the experimental Prompt API. Follow
 1. **Clone the repository:**
 
     ```shell
-    git clone https://github.com/wenqinI/builtin-ai-benchmark.git
+    git clone https://github.com/wenqinI/built-in-ai-benchmark
     ```
 
 2. **Open the file:**
