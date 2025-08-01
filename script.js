@@ -375,7 +375,7 @@ async function runBenchmark() {
 
             const sessionCreated = await ensureSessionCreated(` for round ${i + 1}/${NUM_ROUNDS}`);
             if (!sessionCreated) {
-                continue;
+                return;
             }
 
             updateStatus(`Running warm-up for round ${i + 1}/${NUM_ROUNDS}...`);
