@@ -70,6 +70,8 @@ async function ensureSessionCreated(roundInfo = "") {
     } catch (error) {
         console.error("Failed to create session:", error);
         updateStatus(`Error creating session${roundInfo}: ${error.message}`);
+        // Use innerHTML here for hyper link.
+        outputDiv.innerHTML = 'It looks like some dependencies are missing. You can resolve this by following the steps in the <a href="https://github.com/wenqinI/built-in-ai-benchmark?tab=readme-ov-file#browser-setup" target="_blank">browser setup instructions</a>.';
         session = null;
         return false;
     }
