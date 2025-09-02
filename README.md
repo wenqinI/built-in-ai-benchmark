@@ -14,12 +14,13 @@ To run this benchmark, you must first enable the experimental Prompt API. Follow
 * **Edge:** [Prompt a built-in language model with the Prompt API](https://learn.microsoft.com/en-us/microsoft-edge/web-platform/prompt-api#enable-the-prompt-api)
 
 ## Run the Benchmark
-We could run the benchmark from cloud or host it on local.
+You can run the benchmark directly or host it locally.
 
-### Run benchmark from URL (Recommend)
-We could just go to this [URL](wenqini.github.io/built-in-ai-benchmark/) and run benchmark.
+### Run from the demo page (Recommended)
+ 
+To run the benchmark, simply open [URL](https://www.google.com/search?q=https://wenqini.github.io/built-in-ai-benchmark/).
 
-### Host benchmark on local (Not recommend)
+### Host Locally
 1. **Clone the repository:**
 
     ```shell
