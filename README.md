@@ -11,7 +11,7 @@ This repo is a demo usage of the build-in [Prompt API](https://github.com/webmac
 To run this benchmark, you must first enable the experimental Prompt API. Follow the official instructions for your browser:
 
 * **Chrome:** [Get started with built-in AI](https://developer.chrome.com/docs/ai/get-started#use_apis_on_localhost)
-* **Edge:** [Prompt a built-in language model with the Prompt API](https://developer.chrome.com/docs/ai/get-started#use_apis_on_localhost)
+* **Edge:** [Prompt a built-in language model with the Prompt API](https://learn.microsoft.com/en-us/microsoft-edge/web-platform/prompt-api#enable-the-prompt-api)
 
 ## Run the Benchmark
 We could run the benchmark from cloud or host it on local.
