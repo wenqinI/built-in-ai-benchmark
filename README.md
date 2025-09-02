@@ -18,7 +18,7 @@ You can run the benchmark directly or host it locally.
 
 ### Run from the demo page (Recommended)
  
-To run the benchmark, simply open [URL](https://www.google.com/search?q=https://wenqini.github.io/built-in-ai-benchmark/).
+To run the benchmark, simply open [URL](https://wenqini.github.io/built-in-ai-benchmark/).
 
 ### Host Locally
 1. **Clone the repository:**
