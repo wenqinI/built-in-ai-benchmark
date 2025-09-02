@@ -10,11 +10,16 @@ This repo is a demo usage of the build-in [Prompt API](https://github.com/webmac
 
 To run this benchmark, you must first enable the experimental Prompt API. Follow the official instructions for your browser:
 
-* **Chrome:** [The Prompt API](https://developer.chrome.com/docs/ai/prompt-api)
-* **Edge:** [Prompt a built-in language model with the Prompt API](https://learn.microsoft.com/en-us/microsoft-edge/web-platform/prompt-api)
+* **Chrome:** [Get started with built-in AI](https://developer.chrome.com/docs/ai/get-started#use_apis_on_localhost)
+* **Edge:** [Prompt a built-in language model with the Prompt API](https://developer.chrome.com/docs/ai/get-started#use_apis_on_localhost)
 
 ## Run the Benchmark
+We could run the benchmark from cloud or host it on local.
 
+### Run benchmark from URL (Recommend)
+We could just go to this [URL](wenqini.github.io/built-in-ai-benchmark/) and run benchmark.
+
+### Host benchmark on local (Not recommend)
 1. **Clone the repository:**
 
     ```shell
