@@ -59,6 +59,7 @@ async function ensureSessionCreated(roundInfo = "") {
             throw new Error('Built-in AI (Prompt API) is not available or enabled in this browser.');
         }
 
+        updateStatus(`Try to download the model...`);
         session = await LanguageModel.create({
             monitor(m) {
                 m.addEventListener('downloadprogress', (e) => {
@@ -132,7 +133,7 @@ async function logGpuInfo() {
 async function detectPromptAPI() {
     if ("LanguageModel" in window) {
         const available = await LanguageModel.availability();
-        if (available == "available") {
+        if (available == "available" || available == "downloadable") {
             promptApiAvailable = true;
         }
     }
