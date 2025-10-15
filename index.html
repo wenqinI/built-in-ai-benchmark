@@ -113,6 +113,25 @@
         #benchmarkResultsTable td:first-child {
             font-weight: bold;
         }
+
+        .benchmark-reminder {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+
+        .benchmark-reminder a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 2px;
+            cursor: pointer;
+        }
+
+        .benchmark-reminder a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 
@@ -125,6 +144,9 @@
             id="promptInput">Imagine the world of 2050, and describe what it will look like in 100 words.</textarea>
         <button id="generateResponseButton">Generate Response</button>
         <button id="benchmarkButton">Benchmark (5 Rounds)</button>
+        <div id="benchmarkReminder" class="benchmark-reminder">
+            The default prompt is insufficiently long for effective benchmarking. To ensure more stable and meaningful metrics, please use a prompt closer to <a id="tokens500Link">500</a> or <a id="tokens1000Link">1000</a> tokens.
+        </div>
     </div>
 
     <div>
