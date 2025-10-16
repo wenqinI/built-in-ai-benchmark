@@ -6,6 +6,9 @@ const outputDiv = document.getElementById('output');
 const statusOutputDiv = document.getElementById('statusOutput');
 const benchmarkResultsTableDiv = document.getElementById('benchmarkResultsTable');
 
+const tokens500Link = document.getElementById('tokens500Link');
+const tokens1000Link = document.getElementById('tokens1000Link');
+
 let webGpuAvailable = false; // Flag to track WebGPU availability
 let promptApiAvailable = false; // Flag to track PromptAPI availability
 let session = null; // Session still tracked globally to manage closing if needed
@@ -146,6 +149,16 @@ async function detectAvailability() {
     setButtonStates();
 }
 
+
+async function loadPrompt(tokenCount) {
+    const promptText = EMBEDDED_PROMPTS[tokenCount];
+    
+    if (promptText === undefined) {
+        console.error(`Error: No embedded prompt found for ${tokenCount} tokens.`);
+        return `Error: No embedded prompt found for ${tokenCount} tokens.`;
+    }
+    return promptText;
+}
 
 // --- Core Inference Function (Reusable for both single generation and benchmark) ---
 async function performGeneration(userPrompt, isWarmup = false) {
@@ -454,9 +467,21 @@ async function runBenchmark() {
 }
 
 
+function createLoadPromptHandler(tokenCount) {
+    return async (event) => {
+        event.preventDefault();
+        promptInput.value = `Loading ${tokenCount}-token prompt...`;
+        const promptText = await loadPrompt(tokenCount);
+        promptInput.value = promptText;
+    };
+}
+
 // --- Event Listeners ---
 generateResponseButton.addEventListener('click', generateResponse);
 benchmarkButton.addEventListener('click', runBenchmark);
+
+tokens500Link.addEventListener('click', createLoadPromptHandler(500));
+tokens1000Link.addEventListener('click', createLoadPromptHandler(1000));
 
 // --- Initial Setup on Page Load ---
 window.addEventListener('load', detectAvailability);
