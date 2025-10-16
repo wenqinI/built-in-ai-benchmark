@@ -6,10 +6,8 @@ const outputDiv = document.getElementById('output');
 const statusOutputDiv = document.getElementById('statusOutput');
 const benchmarkResultsTableDiv = document.getElementById('benchmarkResultsTable');
 
-// --- NEW: Get references to the reminder links ---
 const tokens500Link = document.getElementById('tokens500Link');
 const tokens1000Link = document.getElementById('tokens1000Link');
-// ----------------------------------------------
 
 let webGpuAvailable = false; // Flag to track WebGPU availability
 let promptApiAvailable = false; // Flag to track PromptAPI availability
@@ -152,32 +150,15 @@ async function detectAvailability() {
 }
 
 
-async function loadPrompt500() {
-    try {
-        const response = await fetch('prompts/prompt-500-tokens.txt');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return await response.text();
-    } catch (error) {
-        console.error("Error loading 500-token prompt:", error);
-        return "Error loading 500-token prompt. Please check the file prompts/prompt-500-tokens.txt";
+async function loadPrompt(tokenCount) {
+    const promptText = EMBEDDED_PROMPTS[tokenCount];
+    
+    if (promptText === undefined) {
+        console.error(`Error: No embedded prompt found for ${tokenCount} tokens.`);
+        return `Error: No embedded prompt found for ${tokenCount} tokens.`;
     }
+    return promptText;
 }
-
-async function loadPrompt1000() {
-    try {
-        const response = await fetch('prompts/prompt-1000-tokens.txt');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return await response.text();
-    } catch (error) {
-        console.error("Error loading 1000-token prompt:", error);
-        return "Error loading 1000-token prompt. Please check the file prompts/prompt-500-tokens.txt";
-    }
-}
-
 
 // --- Core Inference Function (Reusable for both single generation and benchmark) ---
 async function performGeneration(userPrompt, isWarmup = false) {
@@ -486,23 +467,21 @@ async function runBenchmark() {
 }
 
 
+function createLoadPromptHandler(tokenCount) {
+    return async (event) => {
+        event.preventDefault();
+        promptInput.value = `Loading ${tokenCount}-token prompt...`;
+        const promptText = await loadPrompt(tokenCount);
+        promptInput.value = promptText;
+    };
+}
+
 // --- Event Listeners ---
 generateResponseButton.addEventListener('click', generateResponse);
 benchmarkButton.addEventListener('click', runBenchmark);
 
-tokens500Link.addEventListener('click', async (event) => {
-    event.preventDefault();
-    promptInput.value = "Loading 500-token prompt...";
-    const promptText = await loadPrompt500();
-    promptInput.value = promptText;
-});
-
-tokens1000Link.addEventListener('click', async (event) => {
-    event.preventDefault();
-    promptInput.value = "Loading 1000-token prompt...";
-    const promptText = await loadPrompt1000();
-    promptInput.value = promptText;
-});
+tokens500Link.addEventListener('click', createLoadPromptHandler(500));
+tokens1000Link.addEventListener('click', createLoadPromptHandler(1000));
 
 // --- Initial Setup on Page Load ---
-window.addEventListener('load', detectAvailability); 
+window.addEventListener('load', detectAvailability);
